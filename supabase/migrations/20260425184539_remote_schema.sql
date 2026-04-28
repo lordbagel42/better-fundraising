@@ -1,6 +1,6 @@
 
   create policy "Enable all on test for everyone"
-  on "sveltekit_template"."test"
+  on "better_fundraising"."test"
   as permissive
   for all
   to public

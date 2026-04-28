@@ -24,10 +24,10 @@ COMMENT ON SCHEMA "public" IS 'standard public schema';
 
 
 
-CREATE SCHEMA IF NOT EXISTS "sveltekit_template";
+CREATE SCHEMA IF NOT EXISTS "better_fundraising";
 
 
-ALTER SCHEMA "sveltekit_template" OWNER TO "postgres";
+ALTER SCHEMA "better_fundraising" OWNER TO "postgres";
 
 
 CREATE EXTENSION IF NOT EXISTS "pg_graphql" WITH SCHEMA "graphql";
@@ -76,7 +76,7 @@ SET default_tablespace = '';
 SET default_table_access_method = "heap";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."account_notification" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."account_notification" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL,
@@ -91,20 +91,20 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."account_notification" (
 );
 
 
-ALTER TABLE "sveltekit_template"."account_notification" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."account_notification" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."admin" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."admin" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL
 );
 
 
-ALTER TABLE "sveltekit_template"."admin" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."admin" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."profile" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."profile" (
     "id" "uuid" NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL,
@@ -115,10 +115,10 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."profile" (
 );
 
 
-ALTER TABLE "sveltekit_template"."profile" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."profile" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."role" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."role" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL,
@@ -128,10 +128,10 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."role" (
 );
 
 
-ALTER TABLE "sveltekit_template"."role" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."role" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."role_account" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."role_account" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL,
@@ -140,10 +140,10 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."role_account" (
 );
 
 
-ALTER TABLE "sveltekit_template"."role_account" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."role_account" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."session" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."session" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archived" boolean DEFAULT false NOT NULL,
@@ -152,10 +152,10 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."session" (
 );
 
 
-ALTER TABLE "sveltekit_template"."session" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."session" OWNER TO "postgres";
 
 
-CREATE TABLE IF NOT EXISTS "sveltekit_template"."test" (
+CREATE TABLE IF NOT EXISTS "better_fundraising"."test" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "archive" boolean DEFAULT false NOT NULL,
@@ -164,93 +164,93 @@ CREATE TABLE IF NOT EXISTS "sveltekit_template"."test" (
 );
 
 
-ALTER TABLE "sveltekit_template"."test" OWNER TO "postgres";
+ALTER TABLE "better_fundraising"."test" OWNER TO "postgres";
 
 
-ALTER TABLE ONLY "sveltekit_template"."account_notification"
+ALTER TABLE ONLY "better_fundraising"."account_notification"
     ADD CONSTRAINT "account_notification_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."admin"
+ALTER TABLE ONLY "better_fundraising"."admin"
     ADD CONSTRAINT "admin_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."profile"
+ALTER TABLE ONLY "better_fundraising"."profile"
     ADD CONSTRAINT "profile_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."role_account"
+ALTER TABLE ONLY "better_fundraising"."role_account"
     ADD CONSTRAINT "role_account_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."role"
+ALTER TABLE ONLY "better_fundraising"."role"
     ADD CONSTRAINT "role_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."session"
+ALTER TABLE ONLY "better_fundraising"."session"
     ADD CONSTRAINT "session_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."test"
+ALTER TABLE ONLY "better_fundraising"."test"
     ADD CONSTRAINT "test_pkey" PRIMARY KEY ("id");
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."account_notification"
+ALTER TABLE ONLY "better_fundraising"."account_notification"
     ADD CONSTRAINT "account_notification_account_id_fkey" FOREIGN KEY ("account_id") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."admin"
+ALTER TABLE ONLY "better_fundraising"."admin"
     ADD CONSTRAINT "admin_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."profile"
+ALTER TABLE ONLY "better_fundraising"."profile"
     ADD CONSTRAINT "profile_id_fkey" FOREIGN KEY ("id") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."role_account"
+ALTER TABLE ONLY "better_fundraising"."role_account"
     ADD CONSTRAINT "role_account_account_fkey" FOREIGN KEY ("account") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."role_account"
-    ADD CONSTRAINT "role_account_role_fkey" FOREIGN KEY ("role") REFERENCES "sveltekit_template"."role"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY "better_fundraising"."role_account"
+    ADD CONSTRAINT "role_account_role_fkey" FOREIGN KEY ("role") REFERENCES "better_fundraising"."role"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "sveltekit_template"."session"
+ALTER TABLE ONLY "better_fundraising"."session"
     ADD CONSTRAINT "session_account_id_fkey" FOREIGN KEY ("account_id") REFERENCES "auth"."users"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
-ALTER TABLE "sveltekit_template"."account_notification" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."account_notification" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."admin" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."admin" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."profile" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."profile" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."role" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."role" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."role_account" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."role_account" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."session" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."session" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "sveltekit_template"."test" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE "better_fundraising"."test" ENABLE ROW LEVEL SECURITY;
 
 
 
@@ -262,31 +262,31 @@ ALTER PUBLICATION "supabase_realtime" OWNER TO "postgres";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."account_notification";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."account_notification";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."admin";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."admin";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."profile";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."profile";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."role";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."role";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."role_account";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."role_account";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."session";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."session";
 
 
 
-ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "sveltekit_template"."test";
+ALTER PUBLICATION "supabase_realtime" ADD TABLE ONLY "better_fundraising"."test";
 
 
 
@@ -300,9 +300,9 @@ GRANT USAGE ON SCHEMA "public" TO "service_role";
 
 
 
-GRANT USAGE ON SCHEMA "sveltekit_template" TO "anon";
-GRANT USAGE ON SCHEMA "sveltekit_template" TO "authenticated";
-GRANT USAGE ON SCHEMA "sveltekit_template" TO "service_role";
+GRANT USAGE ON SCHEMA "better_fundraising" TO "anon";
+GRANT USAGE ON SCHEMA "better_fundraising" TO "authenticated";
+GRANT USAGE ON SCHEMA "better_fundraising" TO "service_role";
 
 
 
@@ -495,45 +495,45 @@ GRANT USAGE ON SCHEMA "sveltekit_template" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."account_notification" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."account_notification" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."account_notification" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."account_notification" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."account_notification" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."account_notification" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."admin" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."admin" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."admin" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."admin" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."admin" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."admin" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."profile" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."profile" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."profile" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."profile" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."profile" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."profile" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."role" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."role" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."role" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."role" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."role" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."role" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."role_account" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."role_account" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."role_account" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."role_account" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."role_account" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."role_account" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."session" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."session" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."session" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."session" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."session" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."session" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "sveltekit_template"."test" TO "anon";
-GRANT ALL ON TABLE "sveltekit_template"."test" TO "authenticated";
-GRANT ALL ON TABLE "sveltekit_template"."test" TO "service_role";
+GRANT ALL ON TABLE "better_fundraising"."test" TO "anon";
+GRANT ALL ON TABLE "better_fundraising"."test" TO "authenticated";
+GRANT ALL ON TABLE "better_fundraising"."test" TO "service_role";
 
 
 
@@ -573,21 +573,21 @@ ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "public" GRANT ALL ON TAB
 
 
 
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON SEQUENCES TO "anon";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON SEQUENCES TO "authenticated";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON SEQUENCES TO "service_role";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON SEQUENCES TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON SEQUENCES TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON SEQUENCES TO "service_role";
 
 
 
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON FUNCTIONS TO "anon";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON FUNCTIONS TO "authenticated";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON FUNCTIONS TO "service_role";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON FUNCTIONS TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON FUNCTIONS TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON FUNCTIONS TO "service_role";
 
 
 
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON TABLES TO "anon";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON TABLES TO "authenticated";
-ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "sveltekit_template" GRANT ALL ON TABLES TO "service_role";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON TABLES TO "anon";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON TABLES TO "authenticated";
+ALTER DEFAULT PRIVILEGES FOR ROLE "postgres" IN SCHEMA "better_fundraising" GRANT ALL ON TABLES TO "service_role";
 
 
 
